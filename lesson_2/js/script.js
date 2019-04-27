@@ -98,7 +98,7 @@ class GoodsList { // for render all goods at main page
 }
 
 
-class BasketItem {
+class BasketItem { // товары в корзине отличаются от тех что выводятся на главный экран
     constructor(title, price, count, number) {
         this.title_p = title;
         this.price_p = price;
@@ -122,8 +122,8 @@ class BasketItem {
 
 class userBasket {
     constructor() {
-        this.items = [];
-        this.number = 1;
+        this.items = []; // массив хранит все товары выбранные пользователем
+        this.number = 1; // порядковый номер для таблицы начинатеся с 1
     }
 
 
@@ -132,10 +132,10 @@ class userBasket {
         const isExist = (this.items.filter(i => i.title === title));
         if (isExist.length === 0) {
             let count = 1;
-            number = this.number++;
+            number = this.number++; // считаем номер в таблице
             this.items.push({title, price, count, number});
         } else {
-            isExist[0].count++;
+            isExist[0].count++; // считаем количество добавленного товара
         }
     }
 
@@ -149,10 +149,10 @@ class userBasket {
     }
 }
 
-const user = new userBasket();
-const list = new GoodsList();
-list.fetchGoods();
-list.render();
-list.calcSum();
+const user = new userBasket(); // создание корзины пользователя, рендерится при октрытии модального окна
+const list = new GoodsList(); // создание списка всех товаров
+list.fetchGoods(); // импорт товаров из массива
+list.render(); // рендер кода на страницу
+list.calcSum(); // сумма всех товаров
 
 
