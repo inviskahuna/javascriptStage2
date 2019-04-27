@@ -128,7 +128,7 @@ class userBasket {
 
 
     addItem(title, price) {
-        let number =  this.number;
+        let number = this.number;
         const isExist = (this.items.filter(i => i.title === title));
         if (isExist.length === 0) {
             let count = 1;
@@ -145,7 +145,6 @@ class userBasket {
             const goodItem = new BasketItem(item.title, item.price, item.count, item.number);
             listHtml += goodItem.render();
         });
-        console.log(listHtml);
         document.querySelector('.user_basket').innerHTML = listHtml;
     }
 }
