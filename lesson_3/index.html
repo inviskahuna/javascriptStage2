@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" role="navigation">
+        <a class="navbar-brand" href="#" role="menuitem">Тысяча полезных мелочей</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault"
+                aria-controls="navbarsDefault" aria-expanded="false" aria-label="Переключить навигацию">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" role="search">
+                <input class="form-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Поиск">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                <button class="btn btn-outline-danger ml-4" data-toggle="modal" data-target="#myModal" type="button" onclick="user.render();">
+                    Корзина
+                </button>
+            </form>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="jumbotron lead text-center">
+        <div class="products row">
+
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Ваша корзина</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Товар</th>
+                            <th>Цена, $</th>
+                            <th>Количество, шт.</th>
+                            <th>Сумма, $</th>
+                        </tr>
+                        </thead>
+                        <tbody class="user_basket">
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer class="footer">
+    <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="https://geekbrains.ru/users/1152430"> Латышев Роман</a>
+    </div>
+</footer>
+<!--for merge request-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
