@@ -29,6 +29,7 @@ class ProductsList {
             this.allProducts.push(prod);
             block.insertAdjacentHTML('beforeend', prod.render())
         });
+        // Создаем свой эвент после рендера всех товаров
         let event = new Event('build_done');
         document.dispatchEvent(event)
 
@@ -36,6 +37,15 @@ class ProductsList {
 
     sumPrice() {
         return this.allProducts.reduce((accumulator, item) => accumulator += item.price_p, 0)
+    }
+
+    addListeners() {
+        this.allProducts.forEach(product => {
+            let button = document.getElementsByClassName(product.title_p);
+            button[0].addEventListener("click", function () {
+                alert(product.title_p)
+            });
+        });
     }
 }
 
@@ -64,19 +74,10 @@ class Product {
     }
 }
 
-function querySelectorFunc(productsList) {
-    console.log(productsList["allProducts"][0].title_p);
-}
-
-// let button = document.querySelector("btn");
-// button.addEventListener("click", function() {
-//     console.log("Кнопка нажата.");
-// });
-
 let products_inst = new ProductsList();
 
 
 document.addEventListener('build_done', function () {
     console.log(products_inst.sumPrice());
-    querySelectorFunc(products_inst)
+    products_inst.addListeners();
 }, false);
