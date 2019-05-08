@@ -1,12 +1,11 @@
 const API = 'https://raw.githubusercontent.com/inviskahuna/online-store-api/master/responses';
 
-let event2 = new Event('addNewProduct2Basket');
+let renderBasketAddListeners = new Event('addNewProduct2Basket');
 
 class ProductsList {
     constructor() {
         this.products = [];
         this.allProducts = [];
-        this.articul = 0;
         this._getProducts();
     }
 
@@ -45,8 +44,6 @@ class ProductsList {
                 product.button_p = `<input type=\"button\" value=\"Удалить\" 
                                     class=\"btn btn-sm delete_${product.title_p} btn-outline-danger\">`;
                 basket.addItem(product.title_p, product.price_p, product.button_p);
-                // basket.render();
-                // document.dispatchEvent(event2);
             });
         });
     }
@@ -108,8 +105,7 @@ class Basket {
         this.items.forEach(product => {
             let button = document.getElementsByClassName(`delete_${product.title}`);
             button[0].addEventListener("click", function () {
-                console.log(product.title);
-                basket.removeItem(product.title);
+                basket.removeItem(product);
             })
         });
     }
@@ -125,23 +121,17 @@ class Basket {
         } else { // Если уже такой товар есть в корзине
             isExist[0].count++; // увеличить количество
         }
-        this.render();
-        this.addListeners();
+        document.dispatchEvent(renderBasketAddListeners);
     }
 
-    removeItem(title) {
-        console.log("in remove item");
-        console.log(title, this.items);
-
-        // const isExist = (this.items.filter(i => i.title === title));
-        // console.log();
-        // if (isExist[0].count === 1) {
-        //     this.items.splice(this.items.indexOf(title), 1)
-        // } else {
-        //     isExist[0].count--
-        // }
-        this.render();
-        this.addListeners();
+    removeItem(product) {
+        const isExist = (this.items.filter(i => i === product));
+        if (isExist[0].count === 1) {
+            this.items.splice(this.items.indexOf(product), 1)
+        } else {
+            isExist[0].count--
+        }
+        document.dispatchEvent(renderBasketAddListeners);
     }
 
     render() {
@@ -169,7 +159,6 @@ document.addEventListener('build_done', function () {
 
 
 document.addEventListener('addNewProduct2Basket', function () {
-
-    console.log("addNewProduct2Basket");
+    basket_inst.render();
     basket_inst.addListeners(basket_inst);
 }, false);
