@@ -1,5 +1,7 @@
 const API = 'https://raw.githubusercontent.com/inviskahuna/online-store-api/master/responses';
 
+let event2 = new Event('addNewProduct2Basket');
+
 class ProductsList {
     constructor() {
         this.products = [];
@@ -41,26 +43,13 @@ class ProductsList {
             let button = document.getElementsByClassName(product.title_p);
             button[0].addEventListener("click", function () {
                 product.button_p = `<input type=\"button\" value=\"Удалить\" 
-                                    class=\"btn btn-sm delete_${product.title_p} btn-outline-danger\">`; // .toLowerCase()
+                                    class=\"btn btn-sm delete_${product.title_p} btn-outline-danger\">`;
                 basket.addItem(product.title_p, product.price_p, product.button_p);
-                basket.render();
-                let event2 = new Event('addNewProduct2Basket');
-                document.dispatchEvent(event2);
+                // basket.render();
+                // document.dispatchEvent(event2);
             });
         });
     }
-    //             // При нажатии на кнопку "В корзину" создается товар в корзине и к нему кнопка удаления с колбэком
-    //         });
-    // let deleteClassName = `delete_${product.title_p}`;
-    // let delButton = document.getElementsByClassName(deleteClassName);
-    // console.log(delButton);
-    // if (delButton.length > 0) {
-    //     delButton[0].addEventListener("click", function () {
-    //         console.log("delButton");
-    //         basket.removeItem(product.title_p);
-    //         basket.render();
-    //     });
-    // }
 }
 
 
@@ -115,15 +104,13 @@ class Basket {
         this.number = 1; // порядковый номер для таблицы начинатеся с 1
     }
 
-    addListeners() {
-        // let basket = new Basket();
-        console.log(`.delete_${this.item.title}`);
-        let button = document.getElementsByClassName(`delete_${this.item.title}`); // document.querySelector(`.delete_${this.item.title}`);
-        console.log(button.item(0));
-        button[0].addEventListener("click", function () {
-            console.log("HHHHHHHHHHHH");
-            // this.removeItem(this.item);
-            // this.render();
+    addListeners(basket) {
+        this.items.forEach(product => {
+            let button = document.getElementsByClassName(`delete_${product.title}`);
+            button[0].addEventListener("click", function () {
+                console.log(product.title);
+                basket.removeItem(product.title);
+            })
         });
     }
 
@@ -134,21 +121,27 @@ class Basket {
         if (isExist.length === 0) { // Если товар впервые в корзине
             let count = 1;
             number = this.number++; // считаем номер в таблице
-            // console.log(title, price, number);
-
             this.items.push({title, price, count, number, button});
         } else { // Если уже такой товар есть в корзине
             isExist[0].count++; // увеличить количество
         }
+        this.render();
+        this.addListeners();
     }
 
     removeItem(title) {
-        const isExist = (this.items.filter(i => i.title === title));
-        if (isExist.length === 1) {
-            this.items.splice(this.items.indexOf(title), 1)
-        } else {
-            console.log(this.items.title);
-        }
+        console.log("in remove item");
+        console.log(title, this.items);
+
+        // const isExist = (this.items.filter(i => i.title === title));
+        // console.log();
+        // if (isExist[0].count === 1) {
+        //     this.items.splice(this.items.indexOf(title), 1)
+        // } else {
+        //     isExist[0].count--
+        // }
+        this.render();
+        this.addListeners();
     }
 
     render() {
@@ -176,6 +169,7 @@ document.addEventListener('build_done', function () {
 
 
 document.addEventListener('addNewProduct2Basket', function () {
+
     console.log("addNewProduct2Basket");
-    basket_inst.addListeners();
+    basket_inst.addListeners(basket_inst);
 }, false);
