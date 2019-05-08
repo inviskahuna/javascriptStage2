@@ -125,13 +125,13 @@ class Basket {
     }
 
     removeItem(product) {
-        const isExist = (this.items.filter(i => i === product));
+        const isExist = (this.items.filter(i => i === product)); // проверяем есть ли такой объект
         if (isExist[0].count === 1) {
-            this.items.splice(this.items.indexOf(product), 1)
+            this.items.splice(this.items.indexOf(product), 1) // если его количество = 1 то удаляем его совсем
         } else {
-            isExist[0].count--
+            isExist[0].count-- // если его много то минусуем количество
         }
-        document.dispatchEvent(renderBasketAddListeners);
+        document.dispatchEvent(renderBasketAddListeners); // вызов события для рендеринга корзины и накидывания обработчиков
     }
 
     render() {
@@ -150,15 +150,14 @@ class Basket {
 let basket_inst = new Basket();
 let products_inst = new ProductsList(basket_inst);
 
-document.addEventListener('build_done', function () {
-
-    console.log(products_inst.sumPrice());
-    products_inst.addItem2basket(basket_inst);
+document.addEventListener('build_done', function () { // Обработка события после рендера всех товаров
+    console.log(products_inst.sumPrice()); // После загрузки всех товаров можно посчитать их общую стоимость
+    products_inst.addItem2basket(basket_inst); // навесить события для нажатия кнопки "В корзину"
 
 }, false);
 
 
-document.addEventListener('addNewProduct2Basket', function () {
-    basket_inst.render();
-    basket_inst.addListeners(basket_inst);
+document.addEventListener('addNewProduct2Basket', function () { // Обработка события добавки товара в корзину
+    basket_inst.render(); // рендер корзины
+    basket_inst.addListeners(basket_inst); // накинуть обработку нажатия кнопок
 }, false);
