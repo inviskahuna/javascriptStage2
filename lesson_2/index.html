@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -33,7 +32,9 @@
             <form class="form-inline my-2 my-lg-0" role="search">
                 <input class="form-control mr-sm-2" type="text" placeholder="Поиск" aria-label="Поиск">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
-                <button class="btn btn-outline-danger ml-4" type="submit">Корзина</button>
+                <button class="btn btn-outline-danger ml-4" data-toggle="modal" data-target="#myModal" type="button" onclick="user.render();">
+                    Корзина
+                </button>
             </form>
         </div>
     </nav>
@@ -45,6 +46,38 @@
         </div>
     </div>
 
+    <!-- Модальное окно -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Ваша корзина</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Товар</th>
+                            <th>Цена, $</th>
+                            <th>Количество, шт.</th>
+                            <th>Сумма, $</th>
+                        </tr>
+                        </thead>
+                        <tbody class="user_basket">
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 <footer class="footer">
     <div class="footer-copyright text-center py-3">© 2019 Copyright:
@@ -52,7 +85,7 @@
     </div>
 </footer>
 <!--for merge request-->
-<!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/script.js"></script>
 </body>
