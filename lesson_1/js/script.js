@@ -24,12 +24,8 @@ const renderProduct = (title_p='Product', price_p, sign_p, img_p, link_p) => {
 
 const renderPage = list => {
     const productList = list.map(item => renderProduct(item.title_p, item.price_p, item.sign_p, item.img_p, item.link_p));
-    let m = '';
-    for(let i=0; i<productList.length; i++) {
-        m += productList[i]
-    }
     console.log(productList);
-    document.querySelector('.products').innerHTML = m;
+    document.querySelector('.products').innerHTML = productList.join('');
 };
 
 renderPage(products);
